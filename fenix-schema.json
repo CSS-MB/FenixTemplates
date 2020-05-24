@@ -88,7 +88,7 @@
                     "description": "Command that will be executed after the template runs",
                     "type": ["string", "object"],
                     "properties": {
-                        "linux": {
+                        "Linux": {
                             "type": "string"
                         },
                         "windows": {
