@@ -141,7 +141,7 @@
         "$schema": {
             "type": "string",
             "enum": [
-                "https://raw.githubusercontent.com/acharluk/FenixDefaultTemplates/master/fenix-schema.json"
+                "https://raw.githubusercontent.com/FenixTemplates/FenixTemplates/master/fenix-schema.json"
             ]
         },
         "repoUrl": {
