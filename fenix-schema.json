@@ -1,0 +1,173 @@
+{
+    "$id": "https://raw.githubusercontent.com/acharluk/FenixDefaultTemplates/master/fenix-schema.json",
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "Schema for Fenix repositories",
+    "type": "object",
+    "definitions": {
+        "template": {
+            "description": "A project template",
+            "type": "object",
+            "properties": {
+                "id": {
+                    "description": "Identifier for this template",
+                    "type": "string"
+                },
+                "displayName": {
+                    "description": "Display name for this template",
+                    "type": "string"
+                },
+                "description": {
+                    "description": "Description for this template",
+                    "type": "string"
+                },
+                "language": {
+                    "description": "Language that this template, used for filtering",
+                    "type": "string"
+                },
+                "category": {
+                    "description": "Categories that apply to this template, used for filtering",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "img": {
+                    "description": "Image for this template",
+                    "type": "string",
+                    "format": "uri"
+                },
+                "directories": {
+                    "description": "Directories that will be generated",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "files": {
+                    "description": "Files that will be used in this template, downloaded or generated",
+                    "type": "object",
+                    "properties": {
+                        "create": {
+                            "description": "Files you want to be created when template is executed",
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "download": {
+                            "description": "Downloaded files, URL is generated with the prefix you specify in repoUrl",
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "from": {
+                                        "type": "string"
+                                    },
+                                    "to": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "from",
+                                    "to"
+                                ],
+                                "additionalProperties": false
+                            }
+                        },
+                        "open": {
+                            "description": "Files you want to be opened when template is executed",
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "additionalProperties": false
+                },
+                "command": {
+                    "description": "Command that will be executed after the template runs",
+                    "type": ["string", "object"],
+                    "properties": {
+                        "linux": {
+                            "type": "string"
+                        },
+                        "windows": {
+                            "type": "string"
+                        },
+                        "macos": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "environment": {
+                    "description": "Put the environment variables you use in your template here",
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "id": {
+                                "type": "string"
+                            },
+                            "title": {
+                                "type": "string"
+                            },
+                            "description": {
+                                "type": "string"
+                            },
+                            "default": {
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "id",
+                            "title",
+                            "description"
+                        ]
+                    }
+                }
+            },
+            "additionalProperties": false
+        }
+    },
+    "required": [
+        "$schema",
+        "repoUrl",
+        "repoName",
+        "author",
+        "version",
+        "templates"
+    ],
+    "properties": {
+        "$schema": {
+            "type": "string",
+            "enum": [
+                "https://raw.githubusercontent.com/acharluk/FenixDefaultTemplates/master/fenix-schema.json"
+            ]
+        },
+        "repoUrl": {
+            "description": "Base URL to download files from",
+            "type": "string",
+            "format": "uri"
+        },
+        "repoName": {
+            "description": "Descriptive name for the repository",
+            "type": "string"
+        },
+        "author": {
+            "description": "Author name",
+            "type": "string"
+        },
+        "version": {
+            "description": "Repository version, used for updates",
+            "type": "number"
+        },
+        "templates": {
+            "description": "Templates which this repository provides",
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/template"
+            }
+        }
+    },
+    "additionalProperties": false
+}
